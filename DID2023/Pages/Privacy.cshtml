@@ -1,0 +1,191 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Kişi Sorgulama";
+}
+<script src="~/jsb/search01.js"></script>
+
+<h1>@ViewData["Title"]</h1>
+
+<p><b>Lokasyon;</b> Şehir/İlçe/Mahalle/Sokak Zorunludur</p>
+
+
+
+<div class="text-center">
+    <div id="inline_content">
+        <form class="type">
+            <input class="form-check-input" type="radio" name="type" checked="checked" value="location">  Lokasyon ile Arama</input>
+            <input class="form-check-input" type="radio" name="type" value="personel">  Kişi Bilgileri ile Arama</input>
+        </form>
+    </div>
+</div>
+
+
+<div class="text-center">
+
+    <section id="search-one">
+        <div class="form-group input">
+            <select id="select-sehirler" class="form-control" autocomplete="on" required>
+            </select>
+        </div>
+        <div class="form-group input">
+            <select id="select-ilceler" class="form-control" autocomplete="on" required disabled>
+            </select>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="mahalle" placeholder="Mahalle" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="sokak" placeholder="Sokak" autocomplete="on" required>
+        </div>
+        <section id="search-two" style="display:none;">
+            <div class="form-group input">
+                <input type="text" class="form-control" id="adsoyad" placeholder="Ad Soyad" autocomplete="on" required>
+            </div>
+            <div class="form-group input">
+                <input type="tel" class="form-control" id="tel" placeholder="Cep Telefon(Başında Sıfır Olmadan)" autocomplete="on" required>
+            </div>
+        </section>
+        <div class="form-group input">
+            <input type="button" class="btn btn-success btn-sm button" onclick="locationFindData();" value="Ara">
+        </div>
+    </section>
+
+
+
+    <section id="form-data" style="display:none;">
+
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Ad Soyad" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="tel" class="form-control" id="" placeholder="Cep Telefon(Başında Sıfır Olmadan)" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Evde Yaşayan Kişi Sayısı" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="tel" class="form-control" id="" placeholder="Ev Sahibi Değilseniz, Ev Sahibi Tel No" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Mahalle" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Sokak" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Bina No veya Bina Ad" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Kat No" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Daire No" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="İlçe" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="" placeholder="Şehir" autocomplete="on" disabled>
+        </div>
+        <div>
+            <b class="display-9">Size Ulaşılmadığı Durumlarda; Aşağıdaki Kişi Aranacaktır.</b>
+            <div class="form-group inputdar">
+                <input type="text" class="form-control" id="" placeholder="Yakınınız (Anne-Baba-Kardeş-Arkadaş vb.)" autocomplete="on" disabled>
+            </div>
+            <div class="form-group inputdar">
+                <input type="text" class="form-control" id="" placeholder="Ad Soyad" autocomplete="on" disabled>
+            </div>
+            <div class="form-group inputdar">
+                <input type="tel" class="form-control" id="" placeholder="İletişim No-1(Başında Sıfır Olmadan)" autocomplete="on" disabled>
+            </div>
+            <div class="form-group inputdar">
+                <input type="tel" class="form-control" id="" placeholder="İletişim No-2(Başında Sıfır Olmadan)" autocomplete="on" disabled>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="text-left">
+    <div class="container mt-3">
+        <div id="accordion">
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="adsoyad1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="tel1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="canlisayisi1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="evsahibitel1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="mahalle1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="sokak1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="binano1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="katno1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="daireno1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="ilce1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="sehir1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="yakinadsoyad1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="yakin1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="yakinceptel1" autocomplete="on" disabled>
+    </div>
+    <div class="form-group inputdar">
+        <input type="hidden" class="form-control" id="yakinevtel1" autocomplete="on" disabled>
+    </div>
+</div>
+
+<div class="text-center" style="font:xx-small;">
+    Bu platform kar amacı gütmeden
+    acil durumlarda iletişim için geliştirildi,
+    hiçbir kurum ve kuruluşla ilişiği yoktur.
+    Gerektiğinde yetkili merci ve kurumlara bilgi
+    sağlanabilir ve işbirliği yapılabilir
+    <a asp-area="" asp-page="/Index">Veri Girişi</a>
+</div>
+
+
+<div class="w3-container">
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+
+                <p id="headerTitle" style="margin:25px;"></p>
+                <div>
+                    <table class="table">
+                        <tbody id="tbdetailYakini">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "AnaSayfa";
+}
+
+<script src="~/jsb/personal01.js"></script>
+
+<div class="text-center">
+    <h1 class="display-5">@Helper.Consts.Title</h1>
+    <p>@Helper.Consts.SubTitle<a href="https://did2023.com"></a></p>
+
+    <section id="p1">
+        <div class="form-group input">
+            <select id="select-sehirler" class="form-control" autocomplete="on" required>
+            </select>
+        </div>
+        <div class="form-group input">
+            <select id="select-ilceler" class="form-control" autocomplete="on" required disabled>
+            </select>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="mahalle" placeholder="Mahalle" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="sokak" placeholder="Sokak" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="button" onclick="nextPage(1,2);" class="btn btn-success btn-sm button" value="İleri">
+        </div>
+    </section>
+
+    <section id="p2" style="display:none;">
+        <div class="form-group input">
+            <input type="text" class="form-control" id="binano" placeholder="Bina No veya Bina Ad" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="katno" placeholder="Kat No" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="daireno" placeholder="Daire No" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="evsahibitel" placeholder="Ev Sahibi Değilseniz, Ev Sahibi Tel No" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="button" onclick="backPage(2,1);" class="btn btn-success btn-sm button" value="Geri">
+            <input type="button" onclick="nextPage(2,3);" class="btn btn-success btn-sm button" value="İleri">
+        </div>
+    </section>
+
+    <section id="p3" style="display:none;">
+        <div class="form-group input">
+            <input type="text" class="form-control" id="canlisayisi" placeholder="Evde Yaşayan Canlı Sayısı" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="adsoyad" placeholder="Ad Soyad" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="tel" class="form-control" id="tel" placeholder="Cep Telefon(Başında Sıfır Olmadan)" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="button" onclick="backPage(3,2);" class="btn btn-success btn-sm button" value="Geri">
+            <input type="button" onclick="nextPage(3,4);" class="btn btn-success btn-sm button" value="İleri">
+        </div>
+    </section>
+
+    <section id="p4" style="display:none;">
+        <p>Size Ulaşılmadığında Kontak Kurulacak Kişi Bilgileri</p>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="yakinadsoyad" placeholder="Ad Soyad" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="text" class="form-control" id="yakin" placeholder="Yakınlık Bağınız (Anne-Baba-Kardeş-Arkadaş vb.)" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="tel" class="form-control" id="yakinceptel" placeholder="İletişim No-1(Başında Sıfır Olmadan)" autocomplete="on" required>
+        </div>
+        <div class="form-group input">
+            <input type="tel" class="form-control" id="yakinevtel" placeholder="İletişim No-2(Başında Sıfır Olmadan)" autocomplete="on">
+        </div>
+        <div class="form-group input">
+            <input type="button" onclick="backPage(4,3);" class="btn btn-success btn-sm button" value="Geri">
+            <input type="button" onclick="nextPage(4,5);" class="btn btn-success btn-sm button" value="İleri">
+        </div>
+    </section>
+
+    <section id="p5" style="display:none;">
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="adsoyad1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="tel" class="form-control" id="tel1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="canlisayisi1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="tel" class="form-control" id="evsahibitel1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="mahalle1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="sokak1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="binano1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="katno1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="daireno1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="ilce1" autocomplete="on" disabled>
+        </div>
+        <div class="form-group inputdar">
+            <input type="text" class="form-control" id="sehir1" autocomplete="on" disabled>
+        </div>
+        <div>
+            <b class="display-9">@Helper.Consts.ContactTitle</b>
+            <div class="form-group inputdar">
+                <input type="text" class="form-control" id="yakinadsoyad1" autocomplete="on" disabled>
+            </div>
+            <div class="form-group inputdar">
+                <input type="text" class="form-control" id="yakin1" autocomplete="on" disabled>
+            </div>
+            <div class="form-group inputdar">
+                <input type="tel" class="form-control" id="yakinceptel1" autocomplete="on" disabled>
+            </div>
+            <div class="form-group inputdar">
+                <input type="tel" class="form-control" id="yakinevtel1" autocomplete="on" disabled>
+            </div>
+        </div>
+        <div class="form-group input">
+            <input type="button" id="btnedit" onclick="backPage(5,1);" class="btn btn-danger btn-sm button" value="Düzelt">
+            <input type="button" id="btnsave" class="btn btn-success btn-sm button" onclick="saveData();" value="Kaydet">
+        </div>
+    </section>
+
+    <div id="error" class="alert alert-danger" role="alert" style="display:none;">
+        Alanlar Boş Geçilemez
+    </div>
+
+    <div id="info" class="alert alert-info" role="alert" style="display:none;">
+    </div>
+</div>
+
+<div class="text-center" style="font:xx-small;">
+    Bu platform kar amacı gütmeden
+    acil durumlarda iletişim için geliştirildi,
+    hiçbir kurum ve kuruluşla ilişiği yoktur.
+    Gerektiğinde yetkili merci ve kurumlara bilgi
+    sağlanabilir ve işbirliği yapılabilir
+    <a asp-area="" asp-page="/Privacy">Kişi Sorgula</a>
+</div>
