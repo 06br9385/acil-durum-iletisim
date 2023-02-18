@@ -37,6 +37,8 @@ $(document).ready(function () {
 
 
     $("#inline_content input[name='type']").click(function () {
+        $('#accordion').empty();
+        $('#tbodyMaster0').empty();
         $('#search-two').hide();
         $('#adsoyad').val('');
         $('#tel').val('');
@@ -160,7 +162,7 @@ function openForm(adsoyad1, yakinadsoyad1, yakin1, yakinceptel1, yakinevtel1) {
     $('#headerTitle').empty();
     $('#tbdetailYakini').empty();
     document.getElementById('id01').style.display = 'block';
-    $('#headerTitle').append('<b>' + adsoyad1 + '</b>');
+    $('#headerTitle').append('<b class="btn btn-light btn-sm">' + adsoyad1 + ' bey/hnm ın yakını ile iletişim kurmak için arayınız</b>');
     $('#tbdetailYakini').append('<tr><td><b>Yakını: </b> ' + yakinadsoyad1 + '</td></tr>');
     $('#tbdetailYakini').append('<tr><td><b>Yakınlık Derecesi: </b> ' + yakin1 + '</td></tr>');
     $('#tbdetailYakini').append('<tr><td><a class="btn btn-success btn-sm" href="tel://+9' + yakinceptel1 + '"> ' + yakinceptel1 + ' Ara</a></td></tr>');
