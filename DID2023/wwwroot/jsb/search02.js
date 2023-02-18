@@ -75,9 +75,9 @@ function locationFindData() {
         $.ajax({
             url: '/Home/GetPersonLocation?obj=' + JSON.stringify(obj, null, ' '),
             success: function (data) {
-                //console.log(data);
-                $('#accordion').append(`
-                        <h2>Bulunan Kayıtlar</h2>
+                if (data[0] != null) {
+                    $('#accordion').append(`
+                        <p>Yuvarlak içinde gösterilen değer dairede bulunan canlı sayısıdır.</p>
                         <div class="card">
                             <div class="card-header">
                                 <a class="btn" data-bs-toggle="collapse" href="#collapse${0}"><b>Bina No/Ad: ${data[0].bina}</b></a>
@@ -93,11 +93,11 @@ function locationFindData() {
                              </div>
                         </div>
                     `);
-              
-                for (var i = 0; i < data[0].perList.length; i++) {
-                    //console.log(data[0].perList[i].adsoyad1);
-                    var objem = data[0].perList[i];
-                    $('#tbodyMaster0').append(`
+
+                    for (var i = 0; i < data[0].perList.length; i++) {
+                        //console.log(data[0].perList[i].adsoyad1);
+                        var objem = data[0].perList[i];
+                        $('#tbodyMaster0').append(`
                         <tr>
                            <td>${data[0].perList[i].adsoyad1}</td>
                            <td>${data[0].perList[i].katno1}.Kat Daire:${data[0].perList[i].daireno1}</td>
@@ -106,10 +106,10 @@ function locationFindData() {
                            <td><button class="btn btn-danger btn-sm" id="btndetail" onclick="openForm('${data[0].perList[i].adsoyad1}','${data[0].perList[i].yakinadsoyad1}','${data[0].perList[i].yakin1}','${data[0].perList[i].yakinceptel1}','${data[0].perList[i].yakinevtel1}');">Yakını</button></td>
                         </tr>
                         `);
-                }
+                    }
 
-                for (var i = 1; i < data.length; i++) {
-                    $('#accordion').append(`
+                    for (var i = 1; i < data.length; i++) {
+                        $('#accordion').append(`
                         <div class="card">
                              <div class="card-header">
                                 <a class="collapsed btn" data-bs-toggle="collapse" href="#collapse${i}"><b>Bina No/Ad: ${data[i].bina}</b></a>
@@ -125,8 +125,8 @@ function locationFindData() {
                         </div>
                     `);
 
-                    for (var x = 0; x < data[i].perList.length; x++) {
-                        $('#tbodyMaster'+i).append(`
+                        for (var x = 0; x < data[i].perList.length; x++) {
+                            $('#tbodyMaster' + i).append(`
                         <tr>
                            <td>${data[i].perList[x].adsoyad1}</td>
                            <td>${data[i].perList[x].katno1}.Kat Daire:${data[i].perList[x].daireno1}</td>
@@ -135,7 +135,16 @@ function locationFindData() {
                            <td><button class="btn btn-danger btn-sm" id="btndetail" onclick="openForm('${data[i].perList[x].adsoyad1}','${data[i].perList[x].yakinadsoyad1}','${data[i].perList[x].yakin1}','${data[i].perList[x].yakinceptel1}','${data[i].perList[x].yakinevtel1}');">Yakını</button></td>
                         </tr>
                         `);
+                        }
                     }
+                }
+                else {
+                    var infoObj = $('#info');
+                    infoObj.text('Herhangi Bir Kayıt Bulunamadı');
+                    infoObj.show('slow');
+                    window.setTimeout(function () {
+                        infoObj.hide('slow');
+                    }, 5000);
                 }
             }
         });
