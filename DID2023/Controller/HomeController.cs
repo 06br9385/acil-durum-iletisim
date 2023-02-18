@@ -52,6 +52,8 @@ namespace DID2023.Controller
                 using (var db = new LiteDatabase(database))
                 {
                     var table = db.GetCollection<Personal>(Consts.Table);
+                    var mahalle =location.mahalle1.Length > 3 ? location.mahalle1.Trim()[..2]: location.mahalle1.Trim();
+                    var sokak = location.sokak1.Length > 3 ? location.sokak1.Trim()[..2] : location.sokak1.Trim();
                     if (string.IsNullOrEmpty(location.tel1) && string.IsNullOrEmpty(location.adsoyad1))
                     {
                         var personals = table.Query().
@@ -59,8 +61,8 @@ namespace DID2023.Controller
                        x =>
                        x.sehir1 == location.sehir1 &&
                        x.ilce1 == location.ilce1 &&
-                       x.mahalle1 == location.mahalle1 &&
-                       x.sokak1 == location.sokak1
+                       x.mahalle1.StartsWith(mahalle) &&
+                       x.sokak1.StartsWith(sokak)
                        ).ToList();
 
                         var bina = personals.ToLookup(p => p.binano1);
@@ -84,15 +86,15 @@ namespace DID2023.Controller
                     }
                     else if (!string.IsNullOrEmpty(location.tel1) && !string.IsNullOrEmpty(location.adsoyad1))
                     {
-                        var ad = location.adsoyad1.Split(' ').First();
-                        var soyad = location.adsoyad1.Split(' ').Last();
+                        var ad = location.adsoyad1.Trim().Split(' ').First();
+                        var soyad = location.adsoyad1.Trim().Split(' ').Last();
                         var personals = table.Query().
                       Where(
                       x =>
                       x.sehir1 == location.sehir1 &&
                       x.ilce1 == location.ilce1 &&
-                      x.mahalle1 == location.mahalle1 &&
-                      x.sokak1 == location.sokak1 &&
+                       x.mahalle1.StartsWith(mahalle) &&
+                       x.sokak1.StartsWith(sokak) &&
                       (x.adsoyad1.Contains(ad) || x.adsoyad1.Contains(soyad) || x.adsoyad1.Contains(location.adsoyad1)) &&
                       x.tel1.Substring(1).Replace("(", "").Replace(")", "") == location.tel1
                       ).ToList();
