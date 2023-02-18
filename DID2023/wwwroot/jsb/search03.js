@@ -38,10 +38,10 @@ $(document).ready(function () {
 
     $("#inline_content input[name='type']").click(function () {
         $('#search-two').hide();
-        //$('#search-one').show();
+        $('#adsoyad').val('');
+        $('#tel').val('');
         if ($('input:radio[name=type]:checked').val() == "personel") {
             $('#search-two').show();
-            //$('#search-one').hide();
         }
     });
 });
