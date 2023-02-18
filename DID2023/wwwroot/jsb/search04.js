@@ -98,8 +98,8 @@ function locationFindData() {
                         //console.log(data[0].perList[i].adsoyad1);
                         var objem = data[0].perList[i];
                         $('#tbodyMaster0').append(`
+                        <tr><td colspan="4">${data[0].perList[i].adsoyad1}</td></tr>
                         <tr>
-                           <td>${data[0].perList[i].adsoyad1}</td>
                            <td>${data[0].perList[i].katno1}.Kat Daire:${data[0].perList[i].daireno1}</td>
                            <td><button class="rounded-circle">${data[0].perList[i].canlisayisi1}</button></td>
                            <td><a class="btn btn-success btn-sm" href="tel://+9${data[0].perList[i].tel1}}">Ara</a></td>
@@ -127,8 +127,8 @@ function locationFindData() {
 
                         for (var x = 0; x < data[i].perList.length; x++) {
                             $('#tbodyMaster' + i).append(`
+                            <tr><td colspan="4">${data[i].perList[x].adsoyad1}</td></tr>
                         <tr>
-                           <td>${data[i].perList[x].adsoyad1}</td>
                            <td>${data[i].perList[x].katno1}.Kat Daire:${data[i].perList[x].daireno1}</td>
                            <td><button class="rounded-circle">${data[i].perList[x].canlisayisi1}</button></td>
                            <td><a class="btn btn-success btn-sm" href="tel://+9${data[i].perList[x].tel1}">Ara</a></td>
@@ -163,7 +163,7 @@ function openForm(adsoyad1, yakinadsoyad1, yakin1, yakinceptel1, yakinevtel1) {
     $('#headerTitle').append('<b>' + adsoyad1 + '</b>');
     $('#tbdetailYakini').append('<tr><td><b>Yakını: </b> ' + yakinadsoyad1 + '</td></tr>');
     $('#tbdetailYakini').append('<tr><td><b>Yakınlık Derecesi: </b> ' + yakin1 + '</td></tr>');
-    $('#tbdetailYakini').append('<tr><td><a class="btn btn-success btn-sm" href="tel://+9' + yakinceptel1 + '"> ' + yakinceptel1 +' Ara</a></td></tr>');
+    $('#tbdetailYakini').append('<tr><td><a class="btn btn-success btn-sm" href="tel://+9' + yakinceptel1 + '"> ' + yakinceptel1 + ' Ara</a></td></tr>');
     if (yakinevtel1 != 'null') {
         $('#tbdetailYakini').append('<tr><td><a class="btn btn-success btn-sm" href="tel://+9' + yakinevtel1 + '"> ' + yakinevtel1 + ' Ara</a></td></tr>');
     }

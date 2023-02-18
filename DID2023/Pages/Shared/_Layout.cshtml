@@ -28,6 +28,17 @@
             width: 100px;
         }
     </style>
+    <style>
+        body {
+            background-color: white;
+            color: #3a3a3c;
+        }
+
+        .dark-mode {
+            background-color: #3a3a3c;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -52,10 +63,12 @@
         </nav>
     </header>
     <div class="container">
+        <button class="btn btn-light btn-sm" id="darkmode" onclick="myFunction()">Dark Mode</button>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
         <div class="text-center" style="font:xx-small;">
+            <hr />
             Bu platform kar amacı gütmeden
             acil durumlarda iletişim için geliştirildi,
             hiçbir kurum ve kuruluşla ilişiği yoktur.
@@ -65,7 +78,18 @@
         </div>
     </div>
 
-
+    <script>
+        function myFunction() {
+            var element = document.body;
+            var mode = element.classList.toggle("dark-mode");
+            if (mode) {
+                $('#darkmode').text('Light Mode');
+            }
+            else if(!mode) {
+                $('#darkmode').text('Dark Mode');
+            }
+        }
+    </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
