@@ -63,7 +63,7 @@
         </nav>
     </header>
     <div class="container">
-        <button class="btn btn-light btn-sm" id="darkmode" onclick="myFunction()">Dark Mode</button>
+        <button class="btn btn-light btn-sm" id="darkmode" onclick="myFunction()">Dark</button>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -79,15 +79,36 @@
     </div>
 
     <script>
+
+        $(document).ready(function () {
+            if (localStorage.getItem('mode')) {
+                var element = document.body;
+                var mode = element.classList.toggle("dark-mode");
+                if (mode) {
+                    $('#darkmode').text('Light');
+                    localStorage.setItem('mode', true);
+                }
+                else if (!mode) {
+                    $('#darkmode').text('Dark');
+                    localStorage.removeItem('mode');
+                }
+            }
+        });
+
         function myFunction() {
+
             var element = document.body;
             var mode = element.classList.toggle("dark-mode");
             if (mode) {
-                $('#darkmode').text('Light Mode');
+                $('#darkmode').text('Light');
+                localStorage.setItem('mode', true);
             }
-            else if(!mode) {
-                $('#darkmode').text('Dark Mode');
+            else if (!mode) {
+                $('#darkmode').text('Dark');
+                localStorage.removeItem('mode');
             }
+
+
         }
     </script>
 
