@@ -3,21 +3,22 @@
 @{
     ViewData["Title"] = "Kişi Sorgulama";
 }
-<script src="~/jsb/search02.js"></script>
+<script src="~/jsb/search03.js"></script>
 
-<h1>@ViewData["Title"]</h1>
 
-<p><b>Lokasyon;</b> Şehir/İlçe/Mahalle/Sokak Zorunludur</p>
 
 
 
 <div class="text-center">
+    <h4>@ViewData["Title"]</h4>
     <div id="inline_content">
         <form class="type">
             <input class="form-check-input" type="radio" name="type" checked="checked" value="location">  Lokasyon ile Arama</input>
             <input class="form-check-input" type="radio" name="type" value="personel">  Kişi Bilgileri ile Arama</input>
         </form>
     </div>
+    <hr />
+    <p><b>Bilgi;</b> Şehir/İlçe/Mahalle/Sokak Zorunludur</p>
 </div>
 
 
@@ -165,11 +166,6 @@
 </div>
 
 <div class="text-center" style="font:xx-small;">
-    Bu platform kar amacı gütmeden
-    acil durumlarda iletişim için geliştirildi,
-    hiçbir kurum ve kuruluşla ilişiği yoktur.
-    Gerektiğinde yetkili merci ve kurumlara bilgi
-    sağlanabilir ve işbirliği yapılabilir
     <a asp-area="" asp-page="/Index">Veri Girişi</a>
 </div>
 
